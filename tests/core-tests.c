@@ -76,11 +76,25 @@ ut_test(array_length)
     ut_assert_eq(array_length(arr), 6);
 }
 
+static int test_try_neg(int n)
+{
+    int x = try_neg(n);
+
+    return x + 1;
+}
+
+ut_test(try)
+{
+    ut_assert_eq(test_try_neg(2), 3);
+    ut_assert_eq(test_try_neg(-1), -1);
+}
+
 ut_group(core,
          ut_get_test(expectations),
          ut_get_test(max),
          ut_get_test(min),
          ut_get_test(cmp),
          ut_get_test(swap),
-         ut_get_test(array_length)
+         ut_get_test(array_length),
+         ut_get_test(try),
 );

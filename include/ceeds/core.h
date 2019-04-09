@@ -60,4 +60,19 @@
 
 #define array_length(arr)           (sizeof(arr) / sizeof((arr)[0]))
 
+#define try(x, neq, ret)                                                    \
+    ({                                                                      \
+        typeof(x) __x = (x);                                                \
+                                                                            \
+        if unlikely(__x  == ret) {                                          \
+            return (ret);                                                   \
+        }                                                                   \
+        __x;                                                                \
+    })
+
+#define try_null(x)                 try(x, NULL, NULL)
+#define try_neg(x)                  try(x, -1, -1)
+#define try_negnull(x)              try(n, -1, NULL)
+#define try_nullneg(x)              try(n, NULL, -1)
+
 #endif /* !CEEDS_CORE_H */
