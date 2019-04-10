@@ -89,6 +89,23 @@ ut_test(try)
     ut_assert_eq(test_try_neg(-1), -1);
 }
 
+struct container_of_test_struct
+{
+    int member1;
+    char member2;
+};
+
+ut_test(container_of)
+{
+    struct container_of_test_struct cts;
+
+    int *m1_ptr = &cts.member1;
+    ut_assert_eq(container_of(m1_ptr, struct container_of_test_struct, member1), &cts);
+
+    char *m2_ptr = &cts.member2;
+    ut_assert_eq(container_of(m2_ptr, struct container_of_test_struct, member2), &cts);
+}
+
 ut_group(core,
          ut_get_test(expectations),
          ut_get_test(max),
@@ -97,4 +114,5 @@ ut_group(core,
          ut_get_test(swap),
          ut_get_test(array_length),
          ut_get_test(try),
+         ut_get_test(container_of),
 );

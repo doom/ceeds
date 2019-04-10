@@ -75,4 +75,13 @@
 #define try_negnull(x)              try(n, -1, NULL)
 #define try_nullneg(x)              try(n, NULL, -1)
 
+/**
+ * Get the struct object containing a given pointer-to-member
+ *
+ * @param[in]       ptr         the pointer to the member of the object to retrieve
+ * @param           T           the type of the element to get
+ * @param           f           the name of the field in the @p T type to which @p ptr points to
+ */
+#define container_of(ptr, T, f)     ((T *)((char *)ptr - offsetof(T, f)))
+
 #endif /* !CEEDS_CORE_H */
