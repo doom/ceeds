@@ -13,6 +13,7 @@ add_library(ceeds INTERFACE)
 
 target_sources(ceeds INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/core.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/list.h
         )
 
 target_include_directories(ceeds INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -23,6 +24,7 @@ if (CEEDS_BUILD_TESTS)
     add_executable(ceeds-tests
             tests/unit_tests.h
             tests/core-tests.c
+            tests/list-tests.c
             tests/main.c
             )
 

@@ -5,9 +5,11 @@
 #include "unit_tests.h"
 
 ut_declare_group(core);
+ut_declare_group(list);
 
 int main(void)
 {
     ut_run_group(ut_get_group(core));
+    ut_run_group(ut_get_group(list));
     return 0;
 }
