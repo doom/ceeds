@@ -12,6 +12,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define likely(x)                   (__builtin_expect(!!(x), 1))
 #define unlikely(x)                 (__builtin_expect((x), 0))
