@@ -12,6 +12,7 @@ set(CMAKE_C_FLAGS "${PREPROCESSOR_FLAGS} ${WARNING_FLAGS} ${OPTIMIZATION_FLAGS}"
 add_library(ceeds INTERFACE)
 
 target_sources(ceeds INTERFACE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/bitmanip.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/core.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/list.h
         )
@@ -23,6 +24,7 @@ option(CEEDS_BUILD_TESTS "Build tests of the ceeds library" ON)
 if (CEEDS_BUILD_TESTS)
     add_executable(ceeds-tests
             tests/unit_tests.h
+            tests/bitmanip-tests.c
             tests/core-tests.c
             tests/list-tests.c
             tests/main.c
