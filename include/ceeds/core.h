@@ -85,4 +85,22 @@
  */
 #define container_of(ptr, T, f)     ((T *)((char *)ptr - offsetof(T, f)))
 
+/**
+ * Check whether a number is aligned on a boundary (i.e. it is a multiple of that boundary)
+ *
+ * @param[in]       n           the number to check
+ * @param[in]       al          the alignment boundary
+ * @return                      true if @p n is aligned on a boundary of @p al, false otherwise
+ */
+#define is_aligned(n, al)           (((n) & ((al) - 1)) == 0)
+
+/**
+ * Check whether a pointer is aligned on a boundary (i.e. it is a multiple of that boundary)
+ *
+ * @param[in]       ptr         the pointer to check
+ * @param[in]       al          the alignment boundary
+ * @return                      true if @p ptr is aligned on a boundary of @p al, false otherwise
+ */
+#define is_aligned_ptr(ptr, al)     is_aligned((uintptr_t)(ptr), al)
+
 #endif /* !CEEDS_CORE_H */

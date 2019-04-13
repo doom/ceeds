@@ -106,6 +106,15 @@ ut_test(container_of)
     ut_assert_eq(container_of(m2_ptr, struct container_of_test_struct, member2), &cts);
 }
 
+ut_test(is_aligned)
+{
+    int i;
+    _aligned_(2 * alignof(int)) int j;
+
+    ut_assert(is_aligned_ptr(&i, alignof(int)));
+    ut_assert(is_aligned_ptr(&j, 2 * alignof(int)));
+}
+
 ut_group(core,
          ut_get_test(expectations),
          ut_get_test(max),
@@ -115,4 +124,5 @@ ut_group(core,
          ut_get_test(array_length),
          ut_get_test(try),
          ut_get_test(container_of),
+         ut_get_test(is_aligned),
 );
