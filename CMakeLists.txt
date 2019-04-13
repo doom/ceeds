@@ -16,6 +16,9 @@ target_sources(ceeds INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/bitmanip.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/core.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/list.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/string_utils.h
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/string_utils.c
         )
 
 target_include_directories(ceeds INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -29,6 +32,7 @@ if (CEEDS_BUILD_TESTS)
             tests/bitmanip-tests.c
             tests/core-tests.c
             tests/list-tests.c
+            tests/string_utils-tests.c
             tests/main.c
             )
 
