@@ -16,8 +16,11 @@ target_sources(ceeds INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/bitmanip.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/core.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/list.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/memory.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/memory_allocator.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/string_utils.h
 
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/memory.c
         ${CMAKE_CURRENT_SOURCE_DIR}/src/string_utils.c
         )
 
@@ -32,6 +35,7 @@ if (CEEDS_BUILD_TESTS)
             tests/bitmanip-tests.c
             tests/core-tests.c
             tests/list-tests.c
+            tests/memory-tests.c
             tests/string_utils-tests.c
             tests/main.c
             )
