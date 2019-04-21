@@ -42,6 +42,20 @@ ut_test(heap_allocator)
     int *ptr2 = aligned_new(int, 16);
     ut_assert(is_aligned_ptr(ptr2, 16));
     delete(ptr2);
+
+    int *arr = new_array(int, 10);
+    for (int i = 0; i < 10; ++i) {
+        arr[i] = 243;
+    }
+
+    arr = resize_array(arr, int, 10, 20);
+    for (int i = 0; i < 10; ++i) {
+        ut_assert_eq(arr[i], 243);
+    }
+    for (int i = 10; i < 20; ++i) {
+        arr[i] = 576;
+    }
+    delete(arr);
 }
 
 ut_test(static_allocator)

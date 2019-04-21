@@ -66,12 +66,13 @@ struct memory_allocator
      * If @p new_size is 0, this is equivalent to a regular deallocation
      *
      * @param[in]           alloc       a pointer to the allocator handle used for this allocation
-     * @param[in]           ptr         a pointer to the previously allocated memory
+     * @param[in,out]       ptr         a pointer to the previously allocated memory
      * @param[in]           old_size    the amount of bytes allocated for @p ptr
      * @param[in]           new_size    the new amount of bytes to allocated
      * @param[in]           new_align   the new minimum alignment required for the allocated memory
      * @return                          a pointer to the beginning of the newly allocated memory
      *
+     * @pre                             @p ptr must be a pointer to memory previously allocated using @p alloc, or NULL
      * @pre                             @p new_align must be a power of 2
      */
     void *(*reallocate)(memory_allocator_handle_t alloc, void *ptr, size_t old_size, size_t new_size, size_t new_align);
@@ -112,7 +113,7 @@ struct memory_allocator
  *
  * @pre                                 @p align must be a power of 2
  */
-#define allocator_aligned_new_array(handle, T, n, align)    ((handle)->allocate((handle), sizeof(T) * n, (align)))
+#define allocator_aligned_new_array(handle, T, n, align)    ((handle)->allocate((handle), sizeof(T) * (n), (align)))
 
 /**
  * Allocate memory from a given allocator to hold an array of objects of a given type, with a given alignment, zeroing it
@@ -125,7 +126,29 @@ struct memory_allocator
  *
  * @pre                                 @p align must be a power of 2
  */
-#define allocator_aligned_znew_array(handle, T, n, align)   ((handle)->zero_allocate((handle), sizeof(T) * n, (align)))
+#define allocator_aligned_znew_array(handle, T, n, align)   ((handle)->zero_allocate((handle), sizeof(T) * (n), (align)))
+
+/**
+ * Change the size of the memory block allocated using a given allocator for a given array, with a given alignment.
+ * Data fitting in the new array will be kept.
+ *
+ * If @p ptr is NULL, this is equivalent to a regular allocation.
+ * If @p old_n is 0, no data will be kept
+ * If @p new_n is 0, this is equivalent to a regular deallocation
+ *
+ * @param[in]               handle      a handle to the allocator
+ * @param[in,out]           ptr         a pointer to the allocated memory
+ * @param                   T           the type of object to allocate memory for
+ * @param[in]               old_n       the number of elements allocated in @p ptr
+ * @param[in]               new_n       the number of elements to allocate
+ * @param[in]               align       the minimum alignment required for the memory to allocate
+ * @return                              a pointer to the beginning of the newly allocated memory
+ *
+ * @pre                                 @p ptr must be a pointer to memory previously allocated using @p handle, or NULL
+ * @pre                                 @p align must be a power of 2
+ */
+#define allocator_aligned_resize_array(handle, ptr, T, old_n, new_n, align)             \
+    ((handle)->reallocate((handle), ptr, sizeof(T) * (old_n), sizeof(T) * (new_n), align))
 
 /**
  * Allocate memory from a given allocator to hold an object of a given type
@@ -164,6 +187,26 @@ struct memory_allocator
  * @return                              a pointer to the beginning of the newly allocated memory
  */
 #define allocator_znew_array(handle, T, n)                  allocator_aligned_znew_array(handle, T, n, alignof(T))
+
+/**
+ * Change the size of the memory block allocated using a given allocator for a given array
+ * Data fitting in the new array will be kept.
+ *
+ * If @p ptr is NULL, this is equivalent to a regular allocation.
+ * If @p old_n is 0, no data will be kept
+ * If @p new_n is 0, this is equivalent to a regular deallocation
+ *
+ * @param[in]               handle      a handle to the allocator
+ * @param[in,out]           ptr         a pointer to the allocated memory
+ * @param                   T           the type of object to allocate memory for
+ * @param[in]               old_n       the number of elements allocated in @p ptr
+ * @param[in]               new_n       the number of elements to allocate
+ * @return                              a pointer to the beginning of the newly allocated memory
+ *
+ * @pre                                 @p ptr must be a pointer to memory previously allocated using @p handle, or NULL
+ */
+#define allocator_resize_array(handle, ptr, T, old_n, new_n)                            \
+    allocator_aligned_resize_array(handle, ptr, T, old_n, new_n, alignof(T))
 
 /**
  * Deallocate memory previously allocated from a given allocator
