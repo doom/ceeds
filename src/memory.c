@@ -80,6 +80,7 @@ static void *heap_reallocate(
         if (old_size > 0) {
             memcpy(new_ptr, ptr, MIN(old_size, new_size));
         }
+        heap_deallocate(alloc, ptr);
         return new_ptr;
     }
 }
