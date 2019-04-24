@@ -20,6 +20,7 @@ target_sources(ceeds INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/memory_allocator.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/str.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/string_utils.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/vector.h
 
         ${CMAKE_CURRENT_SOURCE_DIR}/src/memory.c
         ${CMAKE_CURRENT_SOURCE_DIR}/src/string_utils.c
@@ -39,6 +40,7 @@ if (CEEDS_BUILD_TESTS)
             tests/memory-tests.c
             tests/str-tests.c
             tests/string_utils-tests.c
+            tests/vector-tests.c
             tests/main.c
             )
 
