@@ -12,6 +12,7 @@ ut_declare_group(string_utils);
 ut_declare_group(memory);
 ut_declare_group(str);
 ut_declare_group(vector);
+ut_declare_group(growing_str);
 
 int main(void)
 {
@@ -23,5 +24,6 @@ int main(void)
     ut_run_group(ut_get_group(memory));
     ut_run_group(ut_get_group(str));
     ut_run_group(ut_get_group(vector));
+    ut_run_group(ut_get_group(growing_str));
     return 0;
 }
