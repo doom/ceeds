@@ -13,6 +13,7 @@ add_library(ceeds INTERFACE)
 
 target_sources(ceeds INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/ascii_set.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/binary_heap.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/bitmanip.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/core.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/growing_str.h
@@ -36,6 +37,7 @@ if (CEEDS_BUILD_TESTS)
     add_executable(ceeds-tests
             tests/unit_tests.h
             tests/ascii_set-tests.c
+            tests/binary_heap-tests.c
             tests/bitmanip-tests.c
             tests/core-tests.c
             tests/growing_str-tests.c

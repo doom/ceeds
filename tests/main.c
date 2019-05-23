@@ -13,6 +13,7 @@ ut_declare_group(memory);
 ut_declare_group(str);
 ut_declare_group(vector);
 ut_declare_group(growing_str);
+ut_declare_group(binary_heap);
 
 int main(void)
 {
@@ -25,5 +26,6 @@ int main(void)
     ut_run_group(ut_get_group(str));
     ut_run_group(ut_get_group(vector));
     ut_run_group(ut_get_group(growing_str));
+    ut_run_group(ut_get_group(binary_heap));
     return 0;
 }
