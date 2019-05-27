@@ -17,6 +17,8 @@ target_sources(ceeds INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/bitmanip.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/core.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/growing_str.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/hash_map.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/hash_utils.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/list.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/memory.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/memory_allocator.h
@@ -25,6 +27,7 @@ target_sources(ceeds INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/ceeds/vector.h
 
         ${CMAKE_CURRENT_SOURCE_DIR}/src/growing_str.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/hash_utils.c
         ${CMAKE_CURRENT_SOURCE_DIR}/src/memory.c
         ${CMAKE_CURRENT_SOURCE_DIR}/src/string_utils.c
         )
@@ -41,6 +44,7 @@ if (CEEDS_BUILD_TESTS)
             tests/bitmanip-tests.c
             tests/core-tests.c
             tests/growing_str-tests.c
+            tests/hash_map-tests.c
             tests/list-tests.c
             tests/memory-tests.c
             tests/str-tests.c
