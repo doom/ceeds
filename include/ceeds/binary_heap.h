@@ -72,43 +72,43 @@
     do {                                                                    \
         typeof(heap_ptr) __htr_ptr = (heap_ptr);                            \
         size_t __i = (idx);                                                 \
+        typeof(__htr_ptr->data[0]) __e = __htr_ptr->data[__i];              \
                                                                             \
         while (                                                             \
             __i > 0 &&                                                      \
-            cmp(__htr_ptr->data[__i], __htr_ptr->data[(__i - 1) / 2]) > 0   \
+            cmp(__e, __htr_ptr->data[(__i - 1) / 2]) > 0                    \
         ) {                                                                 \
-            SWAP(&__htr_ptr->data[(__i - 1) / 2], &__htr_ptr->data[__i]);   \
+            __htr_ptr->data[__i] = __htr_ptr->data[(__i - 1) / 2];          \
             __i = (__i - 1) / 2;                                            \
         }                                                                   \
+        __htr_ptr->data[__i] = __e;                                         \
     } while (0)
 
 #define _bheap_push_down(heap_ptr, idx, cmp)                                \
     do {                                                                    \
         typeof(heap_ptr) __htr_ptr = (heap_ptr);                            \
         size_t __i = (idx);                                                 \
+        typeof(__htr_ptr->data[0]) __e = __htr_ptr->data[__i];              \
                                                                             \
         while (1) {                                                         \
             size_t __left = __i * 2 + 1;                                    \
             size_t __right = __i * 2 + 2;                                   \
-            size_t __max = __i;                                             \
+            size_t __max_child = __left;                                    \
                                                                             \
-            if (                                                            \
-                __left < __htr_ptr->size &&                                 \
-                cmp(__htr_ptr->data[__max], __htr_ptr->data[__left]) < 0    \
-            ) {                                                             \
-                __max = __left;                                             \
+            if (__left >= __htr_ptr->size) {                                \
+                break;                                                      \
             }                                                               \
             if (                                                            \
                 __right < __htr_ptr->size &&                                \
-                cmp(__htr_ptr->data[__max], __htr_ptr->data[__right]) < 0   \
+                cmp(__htr_ptr->data[__right], __htr_ptr->data[__left]) > 0  \
             ) {                                                             \
-                __max = __right;                                            \
+                __max_child = __right;                                      \
             }                                                               \
-            if (__max == __i) {                                             \
+            if (cmp(__e, __htr_ptr->data[__max_child]) > 0) {               \
                 break;                                                      \
             }                                                               \
-            SWAP(&__htr_ptr->data[__i], &__htr_ptr->data[__max]);           \
-            __i = __max;                                                    \
+            __htr_ptr->data[__i] = __htr_ptr->data[__max_child];            \
+            __i = __max_child;                                              \
         }                                                                   \
     } while (0)
 
